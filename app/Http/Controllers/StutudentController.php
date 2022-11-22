@@ -37,7 +37,7 @@ class StutudentController extends Controller
      */
     public function autocomplete(Request $request)
     {
-        $data = User::select("email as value", "id")
+        $data = Stutudent::select("email as value", "id")
                     ->where('email', 'LIKE', '%'. $request->get('search'). '%')
                     ->get();
     
