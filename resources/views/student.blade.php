@@ -41,6 +41,7 @@
                                         <td>{{$student->lastname}}</td>
                                         <td>{{$student->email}}</td>
                                         <td>{{$student->phone}}</td>
+                                        <td><a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" onclick="editStudent({{$student->id}})" data-target="#studentEditModal">Update</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -87,6 +88,56 @@
     </div>
   </div>
   <!-- End Modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="studentEditModal" tabindex="-1" aria-labelledby="studentEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="studentEditModalLabel">Update Record</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" id="stEditform">
+            @csrf
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" value="" name="firstname" id="firstname_edit" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" value="" name="lastname" id="lastname_edit" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email </label>
+                <input type="email" value="" name="email" id="email_edit" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone </label>
+                <input type="text" value="" name="phone" id="phone_edit" class="form-control" required>
+              </div>
+              <button type="submit" value="" class="btn btn-primary" id="btn-submit" >Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Edit Modal -->
+  <script>
+    function editStudent(id) {
+    
+      $.get('/student/'+id,function(student){
+        alert(student);
+        $("#id").val(student.id);
+        $("#firstname_edit").val(student.firstname_edit);
+        $("#lastname_edit").val(student.lastname_edit);
+        $("#email_edit").val(student.email_edit);
+        $("#phone_edit").val(student.phone_edit);
+        $("#studentEditModal").modal('toggle');
+      });
+    }
+  </script>
   <script>
     $("#stform").submit(function(e){
         e.preventDefault();

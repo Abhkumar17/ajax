@@ -43,4 +43,15 @@ class StutudentController extends Controller
     
         return response()->json($data);
     }
+
+    public function getStudentById($id)
+    {
+        $student = Stutudent::find($id);
+        return response()->json($student);
+    }
+
+    public function updataStudent(Request $request)
+    {
+        
+    }
 }
